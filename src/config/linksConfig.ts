@@ -27,7 +27,7 @@ import { LinktreeProfile } from '../types';
 export const DEFAULT_PROFILE: LinktreeProfile = {
   name: "Caesar AR",
   bio: "Turning Big Dreams Into Reality",
-  avatarUrl: "/src/assets/images/Caesar.jpg",
+  avatarUrl: "/Caesar.jpg",
   title: "Pilih Menu",
   subtitle: "Putar dan pilih tujuanmu!",
   themeColor: "gold",
