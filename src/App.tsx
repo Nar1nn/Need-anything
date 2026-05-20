@@ -6,70 +6,10 @@ import Wheel from './components/Wheel';
 import LinkDetailsModal from './components/LinkDetailsModal';
 import { LinktreeProfile, WheelLinkItem } from './types';
 import { decompressProfile } from './utils/helpers';
-
-// Default Jae profile based strictly on the provided screenshot
-const DEFAULT_JAE_PROFILE: LinktreeProfile = {
-  name: "Caesar AR",
-  bio: "Turning Big Dreams Into Reality",
-  avatarUrl: "/src/assets/images/Caesar.jpg",
-  title: "Pilih Menu",
-  subtitle: "Putar dan pilih tujuanmu!",
-  themeColor: "gold",
-  soundEnabled: true,
-  items: [
-    {
-      id: 1,
-      label: "About Me",
-      description: "Kenali lebih dekat tentang saya",
-      url: "https://website-liminilo-ai.vercel.app/",
-      iconName: "User",
-      color: "#d4af37",
-    },
-    {
-      id: 2,
-      label: "Instagram",
-      description: "Lihat portofolio terbaru",
-      url: "https://instagram.com/liminilo",
-      iconName: "Instagram",
-      color: "#e1306c",
-    },
-    {
-      id: 3,
-      label: "LinkedIN",
-      description: "Lihat pengalaman profesional saya",
-      url: "https://www.linkedin.com/in/caesar-a-zim-riyadi-2884b4404",
-      iconName: "Linkedin",
-      color: "#0077b5",
-    },
-    {
-      id: 4,
-      label: "My Project",
-      description: "Lihat proyek yang sudah saya kerjakan",
-      url: "https://github.com",
-      iconName: "Briefcase",
-      color: "#4caf50",
-    },
-    {
-      id: 5,
-      label: "Whatsapp",
-      description: "Kirim pesan langsung ke saya",
-      url: "https://wa.me/6285758287612",
-      iconName: "MessageSquare",
-      color: "#25d366",
-    },
-    {
-      id: 6,
-      label: "Gmail",
-      description: "Kirim email ke saya",
-      url: "mailto:liminilo23@gmail.com",
-      iconName: "Mail",
-      color: "#ea4335",
-    },
-  ],
-};
+import { DEFAULT_PROFILE } from './config/linksConfig';
 
 export default function App() {
-  const [profile, setProfile] = useState<LinktreeProfile>(DEFAULT_JAE_PROFILE);
+  const [profile, setProfile] = useState<LinktreeProfile>(DEFAULT_PROFILE);
   const [selectedItem, setSelectedItem] = useState<WheelLinkItem | null>(null);
 
   // Initialize and listen to URL hash changes for dynamic share links reloading
@@ -150,8 +90,8 @@ export default function App() {
         console.error('Failed to parse localStorage profile:', err);
       }
 
-      // Standard default Jae profile
-      setProfile(DEFAULT_JAE_PROFILE);
+      // Standard default profile
+      setProfile(DEFAULT_PROFILE);
     }
 
     loadProfileFromUrlOrLocal();
@@ -166,7 +106,7 @@ export default function App() {
     // Clear URL hash & local representation
     window.location.hash = '';
     localStorage.removeItem('interactive_wheel_profile');
-    setProfile(DEFAULT_JAE_PROFILE);
+    setProfile(DEFAULT_PROFILE);
   };
 
   const getThemeTextClass = () => {

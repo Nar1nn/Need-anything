@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import * as Icons from 'lucide-react';
 import { WheelLinkItem, LinktreeProfile } from '../types';
+import { PROJECTS_LIST } from '../config/linksConfig';
 
 interface LinkDetailsModalProps {
   item: WheelLinkItem | null;
@@ -80,22 +81,7 @@ export default function LinkDetailsModal({ item, profile, onClose }: LinkDetails
     return 'Kunjungi Link';
   };
 
-  const PROJECTS_LIST = [
-    {
-      title: "Liminilo tentor Math",
-      tag: "AI Education",
-      description: "Guru virtual berbasis AI membantu kamu belajar dan mengerti Math",
-      url: "https://aistudio.google.com/apps/drive/1Ym99qV7kk430xIJ_dLZWA_8rHzGHT_Ae?fullscreenApplet=true&showPreview=true&showAssistant=true",
-      icon: "GraduationCap"
-    },
-    {
-      title: "Sejarawan Universal",
-      tag: "AI History",
-      description: "Berbicara secara real-time dengan semua tokoh sejarah di dunia",
-      url: "https://sejarawan-universal.vercel.app/",
-      icon: "BookOpen"
-    }
-  ];
+
 
   return (
     <AnimatePresence>
