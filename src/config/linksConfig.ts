@@ -94,6 +94,13 @@ export interface ProjectItem {
 
 export const PROJECTS_LIST: ProjectItem[] = [
   {
+    title: "Full Portofolio",
+    tag: "Portofolio",
+    description: "Tempat Caesar menyimpan semua project dan portofolio yang telah dia buat.",
+    url: "https://website-liminilo-ai.vercel.app/",
+    icon: "FolderKanban"
+  },
+  {
     title: "Liminilo tentor Math",
     tag: "AI Education",
     description: "Guru virtual berbasis AI membantu kamu belajar dan mengerti Math",

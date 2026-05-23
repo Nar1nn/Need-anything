@@ -1,5 +1,5 @@
 {
-  "name": "Interactive Linktree Wheel",
+  "name": "Interactive SpinWheel",
   "description": "A elegant alternative to Linktree featuring a luxurious gold-and-slate interactive spinning wheel, personalized profile details, custom layouts, and audio-visual spinning animations.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
