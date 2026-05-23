@@ -97,7 +97,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     title: "Liminilo tentor Math",
     tag: "AI Education",
     description: "Guru virtual berbasis AI membantu kamu belajar dan mengerti Math",
-    url: "https://aistudio.google.com/apps/drive/1Ym99qV7kk430xIJ_dLZWA_8rHzGHT_Ae?fullscreenApplet=true&showPreview=true&showAssistant=true",
+    url: "https://liminilo-math.vercel.app/",
     icon: "GraduationCap"
   },
   {
