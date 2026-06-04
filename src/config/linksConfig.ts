@@ -99,19 +99,5 @@ export const PROJECTS_LIST: ProjectItem[] = [
     description: "Tempat Caesar menyimpan semua project dan portofolio yang telah dia buat.",
     url: "https://website-liminilo-ai.vercel.app/",
     icon: "FolderKanban"
-  },
-  {
-    title: "Liminilo tentor Math",
-    tag: "AI Education",
-    description: "Guru virtual berbasis AI membantu kamu belajar dan mengerti Math",
-    url: "https://liminilo-math.vercel.app/",
-    icon: "GraduationCap"
-  },
-  {
-    title: "Sejarawan Universal",
-    tag: "AI History",
-    description: "Berbicara secara real-time dengan semua tokoh sejarah di dunia",
-    url: "https://sejarawan-universal.vercel.app/",
-    icon: "BookOpen"
   }
 ];
