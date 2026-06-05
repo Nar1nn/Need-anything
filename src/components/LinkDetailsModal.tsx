@@ -134,14 +134,6 @@ export default function LinkDetailsModal({ item, profile, onClose }: LinkDetails
 
           {!isListView ? (
             <>
-              {/* URL preview string for visual feedback (safeguards user trust) */}
-              <div className="mt-4 px-3 py-2 bg-[#0a0c0e]/80 rounded-[12px] border border-neutral-800/60 flex items-center space-x-2 w-full overflow-hidden">
-                <Icons.Link2 className="text-amber-500/80 shrink-0" size={14} />
-                <span className="text-[11px] font-mono select-all text-neutral-500 truncate w-full tracking-tighter">
-                  {item.url}
-                </span>
-              </div>
-
               {/* Action buttons */}
               <div className="mt-6 flex flex-col space-y-2.5">
                 <a
