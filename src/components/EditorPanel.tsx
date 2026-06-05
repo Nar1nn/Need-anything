@@ -20,7 +20,7 @@ const AVAILABLE_ICONS: { name: IconType; label: string }[] = [
   { name: 'Github', label: 'GitHub' },
   { name: 'Music', label: 'Music/Spotify' },
   { name: 'Gamepad', label: 'Gaming/Discord' },
-  { name: 'ExternalLink', label: 'Lainnya (Link)' },
+  { name: 'ExternalLink', label: 'Other (Link)' },
 ];
 
 export default function EditorPanel({ profile, onChange, onReset }: EditorPanelProps) {
@@ -115,7 +115,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
           style={{ boxShadow: '0 8px 24px rgba(212,175,55,0.3)' }}
         >
           <Icons.Settings className={`animate-spin-slow`} size={18} />
-          <span>Atur Linktree</span>
+          <span>Configure Wheel</span>
         </button>
       </div>
 
@@ -147,8 +147,8 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                     <Icons.Sliders className="text-amber-500 animate-pulse" size={18} />
                   </div>
                   <div>
-                    <h2 className="font-serif text-lg font-bold text-white tracking-wide">Konfigurasi Roda</h2>
-                    <p className="text-[10px] text-neutral-400">Rancang dan bagikan Linktree interaktifmu</p>
+                    <h2 className="font-serif text-lg font-bold text-white tracking-wide">Wheel Configuration</h2>
+                    <p className="text-[10px] text-neutral-400">Design and share your interactive spinwheel</p>
                   </div>
                 </div>
                 
@@ -172,7 +172,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                         : 'text-neutral-400 hover:text-neutral-200'
                     }`}
                   >
-                    {tab === 'profile' ? 'Profil' : tab === 'links' ? 'Roda Link' : 'Tema & Urut'}
+                    {tab === 'profile' ? 'Profile' : tab === 'links' ? 'Links' : 'Themes & Configs'}
                   </button>
                 ))}
               </div>
@@ -187,12 +187,12 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                     {/* Character Details */}
                     <div className="space-y-3.5">
                       <h3 className="text-xs font-semibold uppercase text-neutral-400 tracking-widest flex items-center space-x-1">
-                        <span>Detail Profil Utama</span>
+                        <span>Main Profile Details</span>
                       </h3>
 
                       {/* Display name */}
                       <div className="space-y-1.5">
-                        <label className="text-xs text-neutral-400 font-medium">Nama Anda</label>
+                        <label className="text-xs text-neutral-400 font-medium">Your Name</label>
                         <input
                           type="text"
                           value={profile.name}
@@ -204,7 +204,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
 
                       {/* Bio line */}
                       <div className="space-y-1.5">
-                        <label className="text-xs text-neutral-400 font-medium font-sans">Deskripsi / Bio Ringkas</label>
+                        <label className="text-xs text-neutral-400 font-medium font-sans">Short Bio / Tagline</label>
                         <input
                           type="text"
                           value={profile.bio}
@@ -216,25 +216,25 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
 
                       {/* Main Title ("Pilih Menu") */}
                       <div className="space-y-1.5">
-                        <label className="text-xs text-neutral-400 font-medium">Judul Board Utama</label>
+                        <label className="text-xs text-neutral-400 font-medium">Main Header Title</label>
                         <input
                           type="text"
                           value={profile.title}
                           onChange={(e) => handleFieldChange('title', e.target.value)}
                           className="w-full bg-[#161a22] border border-neutral-800/80 rounded-[10px] px-3 py-2 text-xs text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500/50"
-                          placeholder="Pilih Menu"
+                          placeholder="Choose Menu"
                         />
                       </div>
 
                       {/* Subtitle ("Putar dan pilih tujuanmu!") */}
                       <div className="space-y-1.5">
-                        <label className="text-xs text-neutral-400 font-medium">Sub-deskripsi Board</label>
+                        <label className="text-xs text-neutral-400 font-medium">Sub-description Title</label>
                         <input
                           type="text"
                           value={profile.subtitle}
                           onChange={(e) => handleFieldChange('subtitle', e.target.value)}
                           className="w-full bg-[#161a22] border border-neutral-800/80 rounded-[10px] px-3 py-2 text-xs text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500/50"
-                          placeholder="Putar dan pilih tujuanmu!"
+                          placeholder="Spin and choose your destination!"
                         />
                       </div>
                     </div>
@@ -242,7 +242,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                     {/* Avatar URL Choice */}
                     <div className="space-y-3 pt-3 border-t border-neutral-900">
                       <h3 className="text-xs font-semibold uppercase text-neutral-400 tracking-widest">
-                        Foto Profil (Avatar)
+                        Profile Photo (Avatar)
                       </h3>
 
                       {/* Presets images list selector */}
@@ -272,7 +272,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                       {/* Manual avatar URL Input field */}
                       <div className="space-y-1.5 pt-1.5">
                         <label className="text-[10px] text-neutral-500 font-medium uppercase tracking-wide">
-                          Atau Tulis Link Gambar Kustom Anda
+                          Or Enter Custom Image URL
                         </label>
                         <input
                           type="url"
@@ -286,14 +286,14 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                   </div>
                 )}
 
-                {/* 2. LINKS EDIT TAB (6 segments customizable items) */}
+                {/* 2. LINKS EDIT TAB (customizable items) */}
                 {activeTab === 'links' && (
                   <div className="space-y-4 animate-fade-in pb-12">
                     <div className="flex items-center justify-between">
                       <h3 className="text-xs font-semibold uppercase text-neutral-400 tracking-widest">
-                        Sesuaikan 6 Sektor Roda
+                        Customize Wheel Sectors
                       </h3>
-                      <span className="text-[10px] text-amber-500/80 font-mono">Harus Genap 6 Bagian</span>
+                      <span className="text-[10px] text-amber-500/80 font-mono">Custom links configuration</span>
                     </div>
 
                     {profile.items.map((item, idx) => {
@@ -305,14 +305,14 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                           {/* Segment header badge tag */}
                           <div className="flex items-center justify-between border-b border-[#20242e] pb-2">
                             <span className="text-[11px] font-serif font-semibold text-amber-500 bg-amber-500/10 px-2.5 py-0.5 rounded-full">
-                              Sektor #{idx + 1}
+                              Sector #{idx + 1}
                             </span>
                           </div>
 
                           {/* 2.1 Label and Icon inputs */}
                           <div className="grid grid-cols-3 gap-2">
                             <div className="col-span-2 space-y-1">
-                              <label className="text-[10px] text-neutral-400 font-medium">Label Sektor</label>
+                              <label className="text-[10px] text-neutral-400 font-medium">Sector Label</label>
                               <input
                                 type="text"
                                 value={item.label}
@@ -323,7 +323,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                             </div>
 
                             <div className="space-y-1">
-                              <label className="text-[10px] text-neutral-400 font-medium">Ikon</label>
+                              <label className="text-[10px] text-neutral-400 font-medium">Icon</label>
                               <select
                                 value={item.iconName}
                                 onChange={(e) => handleItemChange(idx, 'iconName', e.target.value)}
@@ -340,31 +340,31 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
 
                           {/* 2.2 Sub-description field */}
                           <div className="space-y-1">
-                            <label className="text-[10px] text-neutral-400 font-medium">Pemerian / Keterangan Sektor</label>
+                            <label className="text-[10px] text-neutral-400 font-medium">Sector Description</label>
                             <input
                               type="text"
                               value={item.description}
                               onChange={(e) => handleItemChange(idx, 'description', e.target.value)}
                               className="w-full bg-[#1a1f29] border border-neutral-800 rounded-[8px] px-2.5 py-1.5 text-xs text-neutral-100 placeholder-neutral-600 focus:outline-none"
-                              placeholder="Deskripsi singkat link"
+                              placeholder="Short description of the link"
                             />
                           </div>
 
                           {/* 2.3 URL link location input */}
                           <div className="space-y-1 bg-[#0d0f13] p-2.5 rounded-[10px]">
                             <label className="text-[9px] text-amber-500/70 uppercase font-bold tracking-wide">
-                              URL Tujuan / Tautan
+                              Destination URL / Link
                             </label>
                             
                             {/* Check for WhatsApp / Email smart converters helper tips */}
                             {item.iconName === 'MessageSquare' && (
                               <p className="text-[8px] text-neutral-500 leading-tight mb-1">
-                                Tips: Masukkan nomor lengkap, misal <b>628123456789</b>
+                                Tip: Enter full number, e.g., <b>628123456789</b>
                               </p>
                             )}
                             {item.iconName === 'Mail' && (
                               <p className="text-[8px] text-neutral-500 leading-tight mb-1">
-                                Tips: Masukkan email lengkap, misal <b>kamu@email.com</b>
+                                Tip: Enter full email, e.g., <b>you@email.com</b>
                               </p>
                             )}
 
@@ -398,16 +398,16 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                     {/* Visual Styling Aesthetics choices */}
                     <div className="space-y-3.5">
                       <h3 className="text-xs font-semibold uppercase text-neutral-400 tracking-widest">
-                        Aset Nuansa / Tema Warna
+                        Color Theme Selector
                       </h3>
 
                       <div className="grid grid-cols-5 gap-2">
                         {([
-                          { key: 'gold', name: 'emas', color: 'bg-amber-500 border-amber-300' },
-                          { key: 'emerald', name: 'hijau', color: 'bg-emerald-500 border-emerald-300' },
-                          { key: 'ruby', name: 'merah', color: 'bg-red-500 border-red-300' },
-                          { key: 'sapphire', name: 'biru', color: 'bg-blue-500 border-blue-300' },
-                          { key: 'violet', name: 'ungu', color: 'bg-violet-500 border-violet-300' },
+                          { key: 'gold', name: 'gold', color: 'bg-amber-500 border-amber-300' },
+                          { key: 'emerald', name: 'green', color: 'bg-emerald-500 border-emerald-300' },
+                          { key: 'ruby', name: 'red', color: 'bg-red-500 border-red-300' },
+                          { key: 'sapphire', name: 'blue', color: 'bg-blue-500 border-blue-300' },
+                          { key: 'violet', name: 'purple', color: 'bg-violet-500 border-violet-300' },
                         ] as const).map((col) => {
                           const active = profile.themeColor === col.key;
                           return (
@@ -429,7 +429,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                     {/* Audio system options */}
                     <div className="space-y-3 pt-4 border-t border-[#1c1f26]">
                       <h3 className="text-xs font-semibold uppercase text-neutral-400 tracking-widest">
-                        Pengaturan Audio Sektor
+                        Sector Audio Settings
                       </h3>
                       
                       <div className="flex items-center justify-between p-3.5 rounded-[14px] bg-[#12151a] border border-neutral-900">
@@ -438,8 +438,8 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                             {profile.soundEnabled ? <Icons.Volume2 size={16} /> : <Icons.VolumeX size={16} />}
                           </div>
                           <div>
-                            <span className="text-xs font-medium text-neutral-100 block">Efek Suara Roda</span>
-                            <span className="text-[9px] text-neutral-500">Mainkan suara klik ketukan mekanis</span>
+                            <span className="text-xs font-medium text-neutral-100 block">Wheel Sound Effects</span>
+                            <span className="text-[9px] text-neutral-500">Play ticking mechanical click sounds</span>
                           </div>
                         </div>
 
@@ -460,7 +460,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                     {/* Presets and Defaults operations */}
                     <div className="space-y-3 pt-4 border-t border-[#1c1f26]">
                       <h3 className="text-xs font-semibold uppercase text-neutral-400 tracking-widest">
-                        Konfigurasi Sistem
+                        System Configuration
                       </h3>
 
                       <div className="grid grid-cols-2 gap-3.5">
@@ -473,7 +473,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                           }}
                           className="py-3 px-4 rounded-[12px] text-center border-neutral-850 hover:bg-neutral-900/60 border border-solid text-xs font-medium text-amber-500/80 transition-colors cursor-pointer active:brightness-95 select-none"
                         >
-                          Bersihkan / Reset
+                          Clear / Reset
                         </button>
 
                         <button
@@ -485,7 +485,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                           }}
                           className="py-3 px-4 rounded-[12px] text-center bg-neutral-900 hover:bg-neutral-850 text-xs font-medium text-neutral-100 border border-[#232832] transition-colors cursor-pointer active:brightness-95"
                         >
-                          Simpan Lokal
+                          Save Locally
                         </button>
                       </div>
                     </div>
@@ -496,8 +496,8 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
               {/* Footer sharing panel generation */}
               <div className="p-4 bg-[#0a0c0e] border-t border-[#1c1f26] space-y-3 select-none">
                 <div className="flex flex-col">
-                  <span className="text-xs font-serif font-bold text-neutral-100">Bagikan Roda Linktree Anda</span>
-                  <span className="text-[9px] text-neutral-500">Salin link shareable self-contained di bawah</span>
+                  <span className="text-xs font-serif font-bold text-neutral-100">Share Your SpinWheel</span>
+                  <span className="text-[9px] text-neutral-500">Copy the self-contained shareable link below</span>
                 </div>
 
                 {/* Action CTA link copy */}
@@ -509,12 +509,12 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                   {copyStatus === 'copied' ? (
                     <>
                       <Icons.CheckCheck size={16} />
-                      <span>Berhasil Disalin!</span>
+                      <span>Copied Successfully!</span>
                     </>
                   ) : (
                     <>
                       <Icons.Share2 size={16} />
-                      <span>Salin Link Shareable</span>
+                      <span>Copy Shareable Link</span>
                     </>
                   )}
                 </button>
@@ -526,7 +526,7 @@ export default function EditorPanel({ profile, onChange, onReset }: EditorPanelP
                     className="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-center"
                   >
                     <span className="text-[10px] text-amber-400 font-sans block leading-tight">
-                      Link tersalin ke clipboard! Siapapun yang mengunjungi link ini akan melihat roda interaktif rancangan Anda secara instan.
+                      Link copied to clipboard! Anyone visiting this link will see your custom interactive wheel instantly.
                     </span>
                   </motion.div>
                 )}

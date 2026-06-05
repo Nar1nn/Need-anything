@@ -13,8 +13,18 @@ interface WheelProps {
 export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const rotationRef = useRef(0);
   const isSpinningRef = useRef(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Update ref to avoid stale closure in animation loops
   useEffect(() => {
@@ -29,9 +39,10 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
   const handleSectorClick = (index: number) => {
     if (isSpinning) return;
 
-    // Direct selection: we spin the wheel to put this segment at the top (12 o'clock)
-    // The center angle for sector index `i` is: i * 60 + 240 degrees
-    const centerAngle = index * 60 + 240;
+    const N = profile.items.length || 4;
+    const sectorAngle = 360 / N;
+    // The center angle for sector index `i` is centered within its sector bounds
+    const centerAngle = index * sectorAngle + (270 - sectorAngle / 2) + sectorAngle / 2;
     
     // We want local angle `centerAngle` to point to global 270 degrees (top pointer)
     let targetLocalRotation = (270 - centerAngle) % 360;
@@ -62,10 +73,12 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
 
   // Perform smooth deceleration animation using JS requestAnimationFrame for clean tick sound triggering
   const animateToAngle = (targetAngle: number, callback: () => void) => {
+    const N = profile.items.length || 4;
+    const sectorAngle = 360 / N;
     const startAngle = rotationRef.current;
     const duration = 2400; // ms
     const startTime = performance.now();
-    let lastTickBoundary = Math.floor(startAngle / 60);
+    let lastTickBoundary = Math.floor(startAngle / sectorAngle);
 
     const step = (now: number) => {
       const elapsed = now - startTime;
@@ -79,7 +92,7 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
       setRotation(currentAngle);
 
       // Track sector crossings for physical mechanical sound effects
-      const currentTickBoundary = Math.floor(currentAngle / 60);
+      const currentTickBoundary = Math.floor(currentAngle / sectorAngle);
       if (currentTickBoundary !== lastTickBoundary) {
         if (profile.soundEnabled) {
           // Pitch drops slightly as the wheel slows down (adds physics flavor!)
@@ -105,11 +118,13 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
     if (isSpinning) return;
 
     // Pick a random segment
-    const randomIndex = Math.floor(Math.random() * profile.items.length);
+    const N = profile.items.length || 4;
+    const sectorAngle = 360 / N;
+    const randomIndex = Math.floor(Math.random() * N);
     
     // Add multiple rotations (5 to 8 full spins) for momentum sensation
     const fullSpins = 5 + Math.floor(Math.random() * 4);
-    const centerAngle = randomIndex * 60 + 240;
+    const centerAngle = randomIndex * sectorAngle + 270;
     let targetLocalRotation = (270 - centerAngle) % 360;
     if (targetLocalRotation < 0) {
       targetLocalRotation += 360;
@@ -183,17 +198,20 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
         />
         
         {/* Dotted metallic golden rivets around the frame ring */}
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1.5 rounded-full border border-amber-600/50 bg-gradient-to-b from-amber-200 to-amber-500 shadow-[0_0_2px_rgba(0,0,0,0.5)] pointer-events-none"
-            style={{
-              transform: `rotate(${i * 30}deg) translateY(-164px) sm:translateY(-184px)`,
-              left: 'calc(50% - 2px)',
-              top: 'calc(50% - 3px)',
-            }}
-          />
-        ))}
+        {[...Array(12)].map((_, i) => {
+          const rivetOffset = isMobile ? -164 : -184;
+          return (
+            <div
+              key={i}
+              className="absolute w-1 h-1.5 rounded-full border border-amber-600/50 bg-gradient-to-b from-amber-200 to-amber-500 shadow-[0_0_2px_rgba(0,0,0,0.5)] pointer-events-none"
+              style={{
+                transform: `rotate(${i * 30}deg) translateY(${rivetOffset}px)`,
+                left: 'calc(50% - 2px)',
+                top: 'calc(50% - 3px)',
+              }}
+            />
+          );
+        })}
 
         {/* Rotating SVG Stage */}
         <div
@@ -231,11 +249,13 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
               </radialGradient>
             </defs>
 
-            {/* Render 6 Segment Sectors */}
+            {/* Render Segment Sectors */}
             {profile.items.map((item, index) => {
+              const N = profile.items.length || 4;
+              const sectorAngle = 360 / N;
               // Mathematical angles calculation
-              const startAngleDeg = index * 60 + 210; // divider lines at 210, 270, 330, 30, 90, 150
-              const endAngleDeg = startAngleDeg + 60;
+              const startAngleDeg = index * sectorAngle + (270 - sectorAngle / 2);
+              const endAngleDeg = startAngleDeg + sectorAngle;
               const startRad = (startAngleDeg * Math.PI) / 180;
               const endRad = (endAngleDeg * Math.PI) / 180;
 
@@ -259,7 +279,6 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
               `;
 
               // Check if currently pointed under pointer at 12 o'clock, which has a global top pointer.
-              const localAngleCenter = index * 60 - 30;
               // Normalize rotation offset
               const normalizedRot = ((rotation % 360) + 360) % 360;
               const localIndicatorPos = ((270 - normalizedRot) % 360 + 360) % 360;
@@ -309,8 +328,10 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
             })}
 
             {/* Radial glow layer lines (drawn separately over slices to keep divider contrast high) */}
-            {[...Array(6)].map((_, i) => {
-              const boundaryDeg = i * 60 + 210;
+            {[...Array(profile.items.length || 4)].map((_, i) => {
+              const N = profile.items.length || 4;
+              const sectorAngle = 360 / N;
+              const boundaryDeg = i * sectorAngle + (270 - sectorAngle / 2);
               const rad = (boundaryDeg * Math.PI) / 180;
               const r = 192;
               const tx = 200 + r * Math.cos(rad);
@@ -335,12 +356,18 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
 
           {/* Place Interactive Segment Labels and Icons floating directly over the Canvas (keeps text un-curved and fully readable) */}
           {profile.items.map((item, index) => {
+            const N = profile.items.length || 4;
+            const sectorAngle = 360 / N;
             // Sector center angle
-            const centerAngleDeg = index * 60 + 240;
+            const centerAngleDeg = index * sectorAngle + (270 - sectorAngle / 2) + sectorAngle / 2;
             const centerRad = (centerAngleDeg * Math.PI) / 180;
             
             // Layout placement coordinates (centroid offset relative to container center)
-            const labelRadius = 115; // float distance from center
+            // On desktop (380px total width), 115px is perfect. On mobile (340px total width), 103px is ideal.
+            // Using a percentage (30.26%) of the total container size ensures it is perfectly relative and 100% symmetric at all window scale sizes!
+            const relativeOffsetPercent = 30.26;
+            const leftPos = 50 + relativeOffsetPercent * Math.cos(centerRad);
+            const topPos = 50 + relativeOffsetPercent * Math.sin(centerRad);
 
             // Angle of item label rotation (so labels are always horizontally easily readable, we don't rotate label wrappers much!)
             // However, to make it feel extremely aligned, we can keep tags completely upright. Let's keep them completely upright! It is 10x easier to read.
@@ -349,10 +376,10 @@ export default function Wheel({ profile, onSelect, selectedItem }: WheelProps) {
             return (
               <div
                 key={item.id}
-                className="absolute flex flex-col items-center justify-center text-center w-[100px] h-[100px] pointer-events-none"
+                className="absolute flex flex-col items-center justify-center text-center w-[90px] h-[90px] pointer-events-none"
                 style={{
-                  left: `calc(50% + ${labelRadius * Math.cos(centerRad)}px)`,
-                  top: `calc(50% + ${labelRadius * Math.sin(centerRad)}px)`,
+                  left: `${leftPos}%`,
+                  top: `${topPos}%`,
                   // Cancel the wheel's rotation on the labels to keep them upright and perfectly legible regardless of rotations!
                   // This is a premium design trick: user's text remains un-inverted and completely legible!
                   transform: `translate(-50%, -50%) rotate(${-rotation}deg)`,

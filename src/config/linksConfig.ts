@@ -28,58 +28,42 @@ export const DEFAULT_PROFILE: LinktreeProfile = {
   name: "Caesar AR",
   bio: "Turning Big Dreams Into Reality",
   avatarUrl: "/Caesar.jpg",
-  title: "Pilih Menu",
-  subtitle: "Putar dan pilih tujuanmu!",
+  title: "Choose Menu",
+  subtitle: "Spin and choose your destination!",
   themeColor: "gold",
   soundEnabled: true,
   items: [
     {
       id: 1,
       label: "About Me",
-      description: "Kenali lebih dekat tentang saya",
+      description: "Get to know me better",
       url: "https://website-liminilo-ai.vercel.app/",
       iconName: "User",
       color: "#d4af37",
     },
     {
       id: 2,
-      label: "Instagram",
-      description: "Lihat portofolio terbaru",
-      url: "https://instagram.com/liminilo",
-      iconName: "Instagram",
-      color: "#e1306c",
+      label: "Social Media",
+      description: "Follow my social media and professional networks",
+      url: "social_media",
+      iconName: "Globe",
+      color: "#3f51b5",
     },
     {
       id: 3,
-      label: "LinkedIN",
-      description: "Lihat pengalaman profesional saya",
-      url: "https://www.linkedin.com/in/caesar-a-zim-riyadi-2884b4404",
-      iconName: "Linkedin",
-      color: "#0077b5",
-    },
-    {
-      id: 4,
       label: "My Project",
-      description: "Lihat proyek yang sudah saya kerjakan",
-      url: "https://github.com",
+      description: "View the projects I have worked on",
+      url: "my_projects",
       iconName: "Briefcase",
       color: "#4caf50",
     },
     {
-      id: 5,
-      label: "Whatsapp",
-      description: "Kirim pesan langsung ke saya",
-      url: "https://wa.me/6285758287612",
+      id: 4,
+      label: "Contact Me",
+      description: "Contact me directly via WhatsApp or Gmail",
+      url: "contact_me",
       iconName: "MessageSquare",
-      color: "#25d366",
-    },
-    {
-      id: 6,
-      label: "Gmail",
-      description: "Kirim email ke saya",
-      url: "mailto:liminilo23@gmail.com",
-      iconName: "Mail",
-      color: "#ea4335",
+      color: "#ff9800",
     },
   ],
 };
@@ -95,9 +79,50 @@ export interface ProjectItem {
 export const PROJECTS_LIST: ProjectItem[] = [
   {
     title: "Full Portofolio",
-    tag: "Portofolio",
-    description: "Tempat Caesar menyimpan semua project dan portofolio yang telah dia buat.",
+    tag: "Portfolio",
+    description: "A place where Caesar stores all projects and portfolio he has created.",
     url: "https://website-liminilo-ai.vercel.app/",
     icon: "FolderKanban"
+  }
+];
+
+export const SOCIAL_MEDIA_LIST: ProjectItem[] = [
+  {
+    title: "LinkedIn",
+    tag: "Professional",
+    description: "Connect on professional networks and find my career history.",
+    url: "https://www.linkedin.com/in/caesar-a-zim-riyadi-2884b4404",
+    icon: "Linkedin"
+  },
+  {
+    title: "Instagram",
+    tag: "Social",
+    description: "View my latest portfolio and daily activities on Instagram.",
+    url: "https://instagram.com/liminilo",
+    icon: "Instagram"
+  },
+  {
+    title: "TikTok",
+    tag: "Social",
+    description: "Watch my videos and creative content on TikTok.",
+    url: "https://www.tiktok.com/@liminilo119?is_from_webapp=1&sender_device=pc",
+    icon: "Video"
+  }
+];
+
+export const CONTACTS_LIST: ProjectItem[] = [
+  {
+    title: "WhatsApp",
+    tag: "Chat",
+    description: "Send me a message for building your ideas into reality or for collaboration",
+    url: "https://wa.me/6285758287612",
+    icon: "MessageSquare"
+  },
+  {
+    title: "Gmail",
+    tag: "Email",
+    description: "Send me an email for building your ideas into reality or for collaboration",
+    url: "https://mail.google.com/mail/?view=cm&fs=1&to=liminilo23@gmail.com",
+    icon: "Mail"
   }
 ];

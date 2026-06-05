@@ -138,10 +138,10 @@ export default function ProfileCard({ profile }: ProfileCardProps) {
         className="mt-8 flex flex-col items-center"
       >
         <h2 className={`text-3xl tracking-widest font-normal bg-gradient-to-r bg-clip-text text-transparent ${getThemeTextClass()} font-serif uppercase`}>
-          {profile.title || "Pilih Menu"}
+          {profile.title || "Choose Menu"}
         </h2>
         <p className="mt-1.5 text-xs text-neutral-400 font-sans tracking-widest">
-          {profile.subtitle || "Putar dan pilih tujuanmu!"}
+          {profile.subtitle || "Spin and choose your destination!"}
         </p>
 
         {/* Elegant Gold Diamond Line Connector */}
