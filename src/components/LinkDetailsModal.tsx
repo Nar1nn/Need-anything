@@ -65,7 +65,7 @@ export default function LinkDetailsModal({ item, profile, onClose }: LinkDetails
 
   const isEmail = item.url.startsWith('mailto:');
   const isWhatsapp = item.url.startsWith('https://wa.me');
-  const isProjects = item.label.toLowerCase().includes('project');
+  const isProjects = item.label.toLowerCase().includes('project') || item.label.toLowerCase().includes('work with me') || item.url === 'my_projects';
   const isContacts = item.label.toLowerCase().includes('contact') || item.label.toLowerCase().includes('hubungi');
   const isSocialMedia = item.label.toLowerCase().includes('social') || item.label.toLowerCase().includes('sosial');
   const isListView = isProjects || isContacts || isSocialMedia;

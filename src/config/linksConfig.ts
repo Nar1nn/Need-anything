@@ -51,8 +51,8 @@ export const DEFAULT_PROFILE: LinktreeProfile = {
     },
     {
       id: 3,
-      label: "My Project",
-      description: "View the projects I have worked on",
+      label: "Work With Me",
+      description: "Let's collaborate and turn your ideas into reality",
       url: "my_projects",
       iconName: "Briefcase",
       color: "#4caf50",
